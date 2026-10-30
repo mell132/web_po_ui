@@ -64,8 +64,10 @@ class BasePage(): #定义公共方法类
         :return:
         '''
         return elem.send_keys(value)
-    def click(self,elem):
+    @classmethod
+    def click(cls,elem):
         return elem.click()
+
     @classmethod
     def WebDriver_Wait(cls,sec,locator,pull_freq=0.5): #显示等待
         '''
@@ -75,16 +77,40 @@ class BasePage(): #定义公共方法类
         :return:
         '''
         w=WebDriverWait(cls._driver,sec,poll_frequency=pull_freq)
-        m=EC.presence_of_all_elements_located(locator)
+        m=EC.presence_of_element_located(locator)
         ele=w.until(m)
         return ele
-    @classmethod
-    def wait(cls,sec): #隐式等待
-        return cls._driver.implicatly_wait(sec)
 
     @classmethod
-    def window_scroll(cls,elem): #滚动
-        return
+    def wait(cls,sec): #隐式等待
+        return cls._driver.implicitly_wait(sec)
+
+    @classmethod
+    def window_scroll(cls, x=0, y=0):
+        '''
+        按指定的像素距离滚动窗口
+        :param x: 水平滚动距离（正数向右，负数向左），默认为 0
+        :param y: 垂直滚动距离（正数向下，负数向上），默认为 0
+        :return:
+        '''
+        return cls._driver.execute_script(f"window.scrollBy({x}, {y});")
+
+    @classmethod
+    def get_text(cls,elem):
+        '''
+        获取标签的文本对象信息
+        :param elem:
+        :return:
+        '''
+        return elem.text
+
+    @classmethod
+    def quit_driver(cls):
+        '''
+        释放浏览器对象
+        :return:
+        '''
+        cls._driver.quit()
 
 
 

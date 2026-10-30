@@ -11,3 +11,11 @@ class Page_Element():
     userPwd=('id','loginPwd')
     #登录按钮
     loginBtn=('id','loginBtn')
+    # 我的桌面
+    myDesktop = ('xpath', '//*[@id="min_title_list"]/li/span')
+
+    # 登录密码错误弹框
+    pwdError = ('xpath', '//div[@class="xubox_dialog"]/span[2]')
+
+    # 登录密码错误弹框
+    userError = ('xpath', '//div[@class="xubox_dialog"]/span[2]')
